@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1a1a2e">
+    <title>استودیو پست اینستاگرام - خدابنده‌لو</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #ff006e;
+            --secondary: #8338ec;
+            --accent: #3a86ff;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --success: #06ffa5;
+            --warning: #ffbe0b;
+            --error: #ff006e;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--dark) 0%, #16213e 100%);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-bottom: 3px solid var(--accent);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            letter-spacing: 1px;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        /* Canvas Section */
+        .canvas-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .canvas-container {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        canvas {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(255, 0, 110, 0.3);
+            display: block;
+            margin: 0 auto;
+            background: #fff;
+            border: 3px solid var(--primary);
+        }
+
+        .canvas-label {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--accent);
+            margin-top: 1rem;
+            font-weight: 600;
+        }
+
+        /* Control Panel */
+        .control-panel {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .control-panel::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .control-panel::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+
+        .control-panel::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+
+        /* Section Headers */
+        .section-header {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .section-header:first-child {
+            margin-top: 0;
+        }
+
+        .section-header::before {
+            content: '✦';
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        /* Form Groups */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--light);
+            font-size: 0.95rem;
+        }
+
+        input[type="file"],
+        input[type="text"],
+        input[type="number"],
+        input[type="color"],
+        select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            font-size: 0.95rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        input[type="file"]::file-selector-button {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-right: 0.5rem;
+        }
+
+        input[type="file"]::file-selector-button:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(255, 0, 110, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        input[type="color"] {
+            cursor: pointer;
+            padding: 0.3rem;
+            height: 50px;
+        }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: left 0.5rem center;
+            background-size: 1.5em 1.5em;
+            padding-left: 2.5rem;
+        }
+
+        /* Buttons */
+        .btn-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        button {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: #fff;
+            box-shadow: 0 5px 15px rgba(255, 0, 110, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 0, 110, 0.5);
+        }
+
+        .btn-primary:active {
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 2px solid var(--accent);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent);
+            box-shadow: 0 5px 15px rgba(58, 134, 255, 0.3);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, var(--error) 0%, #c80064 100%);
+            color: #fff;
+            width: 100%;
+            box-shadow: 0 5px 15px rgba(255, 0, 110, 0.3);
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 0, 110, 0.5);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success) 0%, #05e89a 100%);
+            color: var(--dark);
+            width: 100%;
+            font-weight: 700;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(6, 255, 165, 0.3);
+        }
+
+        /* Range Slider */
+        input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.2);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(255, 0, 110, 0.5);
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 0 10px rgba(255, 0, 110, 0.5);
+        }
+
+        /* Info Box */
+        .info-box {
+            background: rgba(58, 134, 255, 0.1);
+            border-left: 4px solid var(--accent);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tab-btn {
+            padding: 0.6rem 1rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-color: var(--primary);
+            box-shadow: 0 5px 15px rgba(255, 0, 110, 0.3);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Preset Buttons */
+        .preset-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        .preset-btn {
+            padding: 0.6rem;
+            font-size: 0.8rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .preset-btn:hover {
+            background: rgba(255, 0, 110, 0.2);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Download Section */
+        .download-section {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .control-panel {
+                max-height: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header {
+                padding: 1.5rem;
+            }
+
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .canvas-section,
+            .control-panel {
+                padding: 1.5rem;
+            }
+
+            .btn-group {
+                grid-template-columns: 1fr;
+            }
+
+            .tabs {
+                grid-template-columns: 1fr;
+            }
+
+            canvas {
+                max-width: 100%;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            background: linear-gradient(135deg, var(--success) 0%, #05e89a 100%);
+            color: var(--dark);
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(6, 255, 165, 0.4);
+            animation: slideInUp 0.3s ease;
+            z-index: 1000;
+            font-weight: 600;
+        }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Luxury Style Elements */
+        .luxury-divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            margin: 1.5rem 0;
+            opacity: 0.5;
+        }
+
+        .luxury-frame {
+            border: 3px double var(--primary);
+            padding: 1rem;
+            border-radius: 15px;
+            background: linear-gradient(135deg, rgba(255, 0, 110, 0.05), rgba(131, 56, 236, 0.05));
+            margin-bottom: 1rem;
+        }
+
+        .stat-box {
+            background: rgba(58, 134, 255, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid var(--accent);
+        }
+
+        .stat-box .value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .stat-box .label {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <h1>🎨 استودیو پست اینستاگرام</h1>
+        <p>خدابنده‌لو | طراحی و ویرایش حرفه‌ای پست‌های خود</p>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="content-wrapper">
+            <!-- Canvas Section -->
+            <div class="canvas-section">
+                <h2 style="color: var(--accent); margin-bottom: 1rem;">پیش‌نمایش</h2>
+                <div class="canvas-container">
+                    <canvas id="canvas" width="1080" height="1080"></canvas>
+                </div>
+                <div class="canvas-label">تصویر نهایی: 1080 × 1080 پیکسل</div>
+                
+                <div class="luxury-divider"></div>
+
+                <!-- Download Buttons -->
+                <div class="download-section">
+                    <div class="btn-group">
+                        <button class="btn-success" onclick="downloadImage('png')">
+                            ↓ دانلود PNG
+                        </button>
+                        <button class="btn-success" onclick="downloadImage('jpg')">
+                            ↓ دانلود JPG
+                        </button>
+                    </div>
+                    <button class="btn-primary" onclick="shareImage()" style="width: 100%;">
+                        📤 اشتراک‌گذاری
+                    </button>
+                </div>
+            </div>
+
+            <!-- Control Panel -->
+            <div class="control-panel">
+                <!-- Background Section -->
+                <div class="section-header">زمینه</div>
+                
+                <div class="form-group">
+                    <label>نوع زمینه</label>
+                    <select id="bgType" onchange="updateBackground()">
+                        <option value="solid">رنگ ثابت</option>
+                        <option value="gradient">گرادیان</option>
+                        <option value="image">تصویر</option>
+                        <option value="luxury">لاکچری</option>
+                    </select>
+                </div>
+
+                <div id="solidBgControls">
+                    <div class="form-group">
+                        <label>رنگ زمینه</label>
+                        <input type="color" id="bgColor" value="#1a1a2e" onchange="updateBackground()">
+                    </div>
+                </div>
+
+                <div id="gradientBgControls" style="display: none;">
+                    <div class="form-group">
+                        <label>رنگ اول</label>
+                        <input type="color" id="gradColor1" value="#ff006e" onchange="updateBackground()">
+                    </div>
+                    <div class="form-group">
+                        <label>رنگ دوم</label>
+                        <input type="color" id="gradColor2" value="#8338ec" onchange="updateBackground()">
+                    </div>
+                    <div class="form-group">
+                        <label>جهت گرادیان</label>
+                        <select id="gradAngle" onchange="updateBackground()">
+                            <option value="0">افقی →</option>
+                            <option value="90">عمودی ↓</option>
+                            <option value="45">مورب ↘</option>
+                            <option value="-45">مورب ↙</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="imageBgControls" style="display: none;">
+                    <div class="form-group">
+                        <label>آپلود تصویر زمینه</label>
+                        <input type="file" id="bgImage" accept="image/*" onchange="updateBackground()">
+                    </div>
+                </div>
+
+                <!-- Luxury Presets -->
+                <div class="preset-grid">
+                    <button class="preset-btn" onclick="setLuxuryTheme('gold')">🌟 طلایی</button>
+                    <button class="preset-btn" onclick="setLuxuryTheme('silver')">✨ نقره‌ای</button>
+                    <button class="preset-btn" onclick="setLuxuryTheme('ruby')">💎 یاقوت</button>
+                    <button class="preset-btn" onclick="setLuxuryTheme('emerald')">💚 زمردی</button>
+                </div>
+
+                <div class="luxury-divider"></div>
+
+                <!-- Image Section -->
+                <div class="section-header">تصویر</div>
+
+                <div class="form-group">
+                    <label>آپلود تصویر</label>
+                    <input type="file" id="imageInput" accept="image/*" onchange="loadImage()">
+                </div>
+
+                <div class="form-group">
+                    <label>موقعیت عمودی</label>
+                    <input type="range" id="imageY" min="0" max="100" value="50" oninput="updateCanvas()">
+                </div>
+
+                <div class="form-group">
+                    <label>اندازه</label>
+                    <input type="range" id="imageScale" min="0.1" max="2" step="0.1" value="1" oninput="updateCanvas()">
+                </div>
+
+                <div class="form-group">
+                    <label>نسبت ته‌بندی</label>
+                    <select id="imageFit" onchange="updateCanvas()">
+                        <option value="cover">پر کردن</option>
+                        <option value="contain">متناسب</option>
+                        <option value="stretch">کشش</option>
+                    </select>
+                </div>
+
+                <button class="btn-danger" onclick="clearImage()" style="margin-bottom: 1rem;">
+                    🗑️ پاک کردن تصویر
+                </button>
+
+                <div class="luxury-divider"></div>
+
+                <!-- Text Section -->
+                <div class="section-header">متن</div>
+
+                <div class="form-group">
+                    <label>متن اصلی</label>
+                    <input type="text" id="mainText" placeholder="متن خود را وارد کنید" onchange="updateCanvas()">
+                </div>
+
+                <div class="form-group">
+                    <label>رنگ متن</label>
+                    <input type="color" id="textColor" value="#ffffff" onchange="updateCanvas()">
+                </div>
+
+                <div class="form-group">
+                    <label>اندازه فونت</label>
+                    <input type="range" id="fontSize" min="20" max="200" value="60" oninput="updateCanvas()">
+                </div>
+
+                <div class="form-group">
+                    <label>فونت</label>
+                    <select id="fontFamily" onchange="updateCanvas()">
+                        <option value="Arial">Arial</option>
+                        <option value="Georgia">Georgia</option>
+                        <option value="Times New Roman">Times New Roman</option>
+                        <option value="Courier New">Courier New</option>
+                        <option value="Verdana">Verdana</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>وزن فونت</label>
+                    <select id="fontWeight" onchange="updateCanvas()">
+                        <option value="normal">عادی</option>
+                        <option value="bold">درشت</option>
+                        <option value="900">بسیار درشت</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>موقعیت متن</label>
+                    <select id="textPosition" onchange="updateCanvas()">
+                        <option value="top">بالا</option>
+                        <option value="center">وسط</option>
+                        <option value="bottom">پایین</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>سایه متن</label>
+                    <input type="range" id="textShadow" min="0" max="20" value="0" oninput="updateCanvas()">
+                </div>
+
+                <button class="btn-secondary" onclick="addTextEffect()" style="width: 100%; margin-bottom: 1rem;">
+                    ✨ افکت متن
+                </button>
+
+                <div class="luxury-divider"></div>
+
+                <!-- Frame Section -->
+                <div class="section-header">قاب و بوستر</div>
+
+                <div class="form-group">
+                    <label>نوع قاب</label>
+                    <select id="frameType" onchange="updateFrame()">
+                        <option value="none">بدون قاب</option>
+                        <option value="simple">ساده</option>
+                        <option value="double">دوگانه</option>
+                        <option value="gold">طلایی</option>
+                        <option value="neon">نئونی</option>
+                        <option value="prestige">پرستیژ</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>ضخامت قاب</label>
+                    <input type="range" id="frameWidth" min="0" max="50" value="0" oninput="updateFrame()">
+                </div>
+
+                <div class="form-group">
+                    <label>رنگ قاب</label>
+                    <input type="color" id="frameColor" value="#ff006e" onchange="updateFrame()">
+                </div>
+
+                <div id="prestigeControls" style="display: none;">
+                    <div class="form-group">
+                        <label>شدت درخشش</label>
+                        <input type="range" id="glowIntensity" min="0" max="50" value="10" oninput="updateFrame()">
+                    </div>
+                </div>
+
+                <div class="luxury-divider"></div>
+
+                <!-- Effects Section -->
+                <div class="section-header">افکت‌ها</div>
+
+                <div class="form-group">
+                    <label>تاریکی</label>
+                    <input type="range" id="darkness" min="0" max="100" value="0" oninput="updateCanvas()">
+                </div>
+
+                <div class="form-group">
+                    <label>اشراق</label>
+                    <input type="range" id="brightness" min="0" max="200" value="100" oninput="updateCanvas()">
+                </div>
+
+                <div class="form-group">
+                    <label>کنتراست</label>
+                    <input type="range" id="contrast" min="0" max="200" value="100" oninput="updateCanvas()">
+                </div>
+
+                <div class="form-group">
+                    <label>اشباع رنگ</label>
+                    <input type="range" id="saturation" min="0" max="200" value="100" oninput="updateCanvas()">
+                </div>
+
+                <div class="form-group">
+                    <label>تار</label>
+                    <input type="range" id="blur" min="0" max="20" value="0" oninput="updateCanvas()">
+                </div>
+
+                <div class="luxury-divider"></div>
+
+                <!-- Advanced Settings -->
+                <div class="section-header">تنظیمات پیشرفته</div>
+
+                <div class="info-box">
+                    <strong>💡 نکته:</strong> در این بخش می‌توانید تنظیمات پیشرفته و تخصصی را مدیریت کنید.
+                </div>
+
+                <div class="form-group">
+                    <label>شفافیت تصویر</label>
+                    <input type="range" id="imageOpacity" min="0" max="100" value="100" oninput="updateCanvas()">
+                </div>
+
+                <div class="form-group">
+                    <label>چرخش تصویر</label>
+                    <input type="range" id="imageRotation" min="0" max="360" value="0" oninput="updateCanvas()">
+                </div>
+
+                <div class="form-group">
+                    <label>فیلتر رنگ</label>
+                    <select id="colorFilter" onchange="updateCanvas()">
+                        <option value="none">بدون فیلتر</option>
+                        <option value="sepia">سپیا</option>
+                        <option value="grayscale">سیاه و سفید</option>
+                        <option value="invert">منعکس</option>
+                        <option value="cool">سرد</option>
+                        <option value="warm">گرم</option>
+                    </select>
+                </div>
+
+                <button class="btn-secondary" onclick="resetAll()" style="width: 100%; margin-top: 1rem;">
+                    🔄 بازنشانی تمام
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        let image = null;
+        let bgImage = null;
+
+        // Initialize
+        updateCanvas();
+
+        // Background Type Change
+        document.getElementById('bgType').addEventListener('change', function() {
+            document.getElementById('solidBgControls').style.display = this.value === 'solid' ? 'block' : 'none';
+            document.getElementById('gradientBgControls').style.display = this.value === 'gradient' ? 'block' : 'none';
+            document.getElementById('imageBgControls').style.display = this.value === 'image' ? 'block' : 'none';
+            updateBackground();
+        });
+
+        // Frame Type Change
+        document.getElementById('frameType').addEventListener('change', function() {
+            document.getElementById('prestigeControls').style.display = this.value === 'prestige' ? 'block' : 'none';
+            updateFrame();
+        });
+
+        function loadImage() {
+            const file = document.getElementById('imageInput').files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    image = new Image();
+                    image.onload = updateCanvas;
+                    image.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function updateBackground() {
+            const bgType = document.getElementById('bgType').value;
+            
+            if (bgType === 'image') {
+                const file = document.getElementById('bgImage').files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        bgImage = new Image();
+                        bgImage.onload = updateCanvas;
+                        bgImage.src = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            } else {
+                updateCanvas();
+            }
+        }
+
+        function updateCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw Background
+            const bgType = document.getElementById('bgType').value;
+            
+            if (bgType === 'solid') {
+                ctx.fillStyle = document.getElementById('bgColor').value;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            } else if (bgType === 'gradient') {
+                const angle = parseInt(document.getElementById('gradAngle').value);
+                let x1 = 0, y1 = 0, x2 = 0, y2 = 0;
+                if (angle === 0) { x1 = 0; y1 = 0; x2 = canvas.width; y2 = 0; }
+                else if (angle === 90) { x1 = 0; y1 = 0; x2 = 0; y2 = canvas.height; }
+                else if (angle === 45) { x1 = 0; y1 = 0; x2 = canvas.width; y2 = canvas.height; }
+                else if (angle === -45) { x1 = canvas.width; y1 = 0; x2 = 0; y2 = canvas.height; }
+                
+                const gradient = ctx.createLinearGradient(x1, y1, x2, y2);
+                gradient.addColorStop(0, document.getElementById('gradColor1').value);
+                gradient.addColorStop(1, document.getElementById('gradColor2').value);
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            } else if (bgType === 'image' && bgImage) {
+                ctx.drawImage(bgImage, 0, 0, canvas.width, canvas.height);
+            } else if (bgType === 'luxury') {
+                // Luxury gradient background
+                const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+                gradient.addColorStop(0, '#0a0e27');
+                gradient.addColorStop(0.5, '#1a1a2e');
+                gradient.addColorStop(1, '#16213e');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Add subtle pattern
+                ctx.strokeStyle = 'rgba(255, 0, 110, 0.05)';
+                for (let i = 0; i < 20; i++) {
+                    ctx.beginPath();
+                    ctx.moveTo(0, i * 54);
+                    ctx.lineTo(canvas.width, i * 54);
+                    ctx.stroke();
+                }
+            }
+
+            // Apply Effects Filter
+            applyEffectsFilter();
+
+            // Draw Background Image if present
+            if (image && document.getElementById('bgType').value !== 'image') {
+                const scale = parseFloat(document.getElementById('imageScale').value);
+                const yOffset = (canvas.height * parseFloat(document.getElementById('imageY').value)) / 100;
+                const fit = document.getElementById('imageFit').value;
+                const opacity = parseFloat(document.getElementById('imageOpacity').value) / 100;
+                const rotation = parseFloat(document.getElementById('imageRotation').value);
+
+                ctx.save();
+                ctx.globalAlpha = opacity;
+
+                if (rotation !== 0) {
+                    ctx.translate(canvas.width / 2, canvas.height / 2);
+                    ctx.rotate((rotation * Math.PI) / 180);
+                    ctx.translate(-canvas.width / 2, -canvas.height / 2);
+                }
+
+                if (fit === 'cover') {
+                    const ratio = canvas.width / image.width;
+                    const drawWidth = canvas.width;
+                    const drawHeight = image.height * ratio * scale;
+                    ctx.drawImage(image, 0, yOffset - drawHeight / 2, drawWidth, drawHeight);
+                } else if (fit === 'contain') {
+                    const ratio = Math.min(canvas.width / image.width, canvas.height / image.height);
+                    const drawWidth = image.width * ratio * scale;
+                    const drawHeight = image.height * ratio * scale;
+                    ctx.drawImage(image, (canvas.width - drawWidth) / 2, yOffset - drawHeight / 2, drawWidth, drawHeight);
+                } else if (fit === 'stretch') {
+                    ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+                }
+
+                ctx.restore();
+            }
+
+            // Draw Frame
+            updateFrame();
+
+            // Draw Text
+            drawText();
+
+            // Show toast
+            showToast('بروزرسانی شد ✓');
+        }
+
+        function drawText() {
+            const mainText = document.getElementById('mainText').value;
+            if (!mainText) return;
+
+            const fontSize = parseInt(document.getElementById('fontSize').value);
+            const fontFamily = document.getElementById('fontFamily').value;
+            const fontWeight = document.getElementById('fontWeight').value;
+            const color = document.getElementById('textColor').value;
+            const position = document.getElementById('textPosition').value;
+            const shadow = parseInt(document.getElementById('textShadow').value);
+
+            ctx.font = `${fontWeight} ${fontSize}px ${fontFamily}`;
+            ctx.fillStyle = color;
+            ctx.textAlign = 'center';
+
+            let yPos;
+            if (position === 'top') yPos = fontSize + 50;
+            else if (position === 'center') yPos = canvas.height / 2;
+            else yPos = canvas.height - 50;
+
+            if (shadow > 0) {
+                ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+                ctx.shadowBlur = shadow;
+                ctx.shadowOffsetX = 2;
+                ctx.shadowOffsetY = 2;
+            }
+
+            ctx.fillText(mainText, canvas.width / 2, yPos);
+            ctx.shadowBlur = 0;
+        }
+
+        function updateFrame() {
+            const frameType = document.getElementById('frameType').value;
+            const frameWidth = parseInt(document.getElementById('frameWidth').value);
+            const frameColor = document.getElementById('frameColor').value;
+
+            if (frameWidth === 0) return;
+
+            ctx.save();
+
+            if (frameType === 'simple') {
+                ctx.strokeStyle = frameColor;
+                ctx.lineWidth = frameWidth;
+                ctx.strokeRect(frameWidth / 2, frameWidth / 2, canvas.width - frameWidth, canvas.height - frameWidth);
+            } else if (frameType === 'double') {
+                ctx.strokeStyle = frameColor;
+                ctx.lineWidth = frameWidth / 2;
+                ctx.strokeRect(frameWidth, frameWidth, canvas.width - frameWidth * 2, canvas.height - frameWidth * 2);
+                ctx.strokeRect(frameWidth / 2, frameWidth / 2, canvas.width - frameWidth, canvas.height - frameWidth);
+            } else if (frameType === 'gold') {
+                const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+                gradient.addColorStop(0, '#FFD700');
+                gradient.addColorStop(0.5, '#FFA500');
+                gradient.addColorStop(1, '#FFD700');
+                ctx.strokeStyle = gradient;
+                ctx.lineWidth = frameWidth;
+                ctx.strokeRect(frameWidth / 2, frameWidth / 2, canvas.width - frameWidth, canvas.height - frameWidth);
+            } else if (frameType === 'neon') {
+                ctx.strokeStyle = frameColor;
+                ctx.lineWidth = frameWidth;
+                ctx.shadowColor = frameColor;
+                ctx.shadowBlur = 20;
+                ctx.strokeRect(frameWidth / 2, frameWidth / 2, canvas.width - frameWidth, canvas.height - frameWidth);
+            } else if (frameType === 'prestige') {
+                const glowIntensity = parseInt(document.getElementById('glowIntensity').value);
+                ctx.strokeStyle = frameColor;
+                ctx.lineWidth = frameWidth;
+                ctx.shadowColor = frameColor;
+                ctx.shadowBlur = glowIntensity;
+                ctx.shadowOffsetX = 0;
+                ctx.shadowOffsetY = 0;
+                ctx.strokeRect(frameWidth / 2, frameWidth / 2, canvas.width - frameWidth, canvas.height - frameWidth);
+                
+                // Double prestige frame
+                ctx.lineWidth = frameWidth / 2;
+                ctx.strokeRect(frameWidth, frameWidth, canvas.width - frameWidth * 2, canvas.height - frameWidth * 2);
+            }
+
+            ctx.restore();
+        }
+
+        function applyEffectsFilter() {
+            const darkness = parseInt(document.getElementById('darkness').value);
+            const brightness = parseInt(document.getElementById('brightness').value);
+            const contrast = parseInt(document.getElementById('contrast').value);
+            const saturation = parseInt(document.getElementById('saturation').value);
+            const blur = parseInt(document.getElementById('blur').value);
+            const colorFilter = document.getElementById('colorFilter').value;
+
+            let filter = '';
+            filter += `brightness(${brightness}%) `;
+            filter += `contrast(${contrast}%) `;
+            filter += `saturate(${saturation}%) `;
+            filter += `blur(${blur}px) `;
+
+            if (darkness > 0) {
+                filter += `brightness(${100 - darkness * 0.5}%) `;
+            }
+
+            canvas.style.filter = filter;
+        }
+
+        function addTextEffect() {
+            const text = document.getElementById('mainText').value;
+            if (!text) {
+                showToast('لطفاً متن را وارد کنید', 'error');
+                return;
+            }
+            // Add more decorations
+            document.getElementById('mainText').value = '✨ ' + text + ' ✨';
+            updateCanvas();
+        }
+
+        function setLuxuryTheme(theme) {
+            if (theme === 'gold') {
+                document.getElementById('bgType').value = 'gradient';
+                document.getElementById('gradColor1').value = '#FFD700';
+                document.getElementById('gradColor2').value = '#8B4513';
+                document.getElementById('frameColor').value = '#FFD700';
+                document.getElementById('frameType').value = 'gold';
+                document.getElementById('frameWidth').value = '15';
+            } else if (theme === 'silver') {
+                document.getElementById('bgType').value = 'gradient';
+                document.getElementById('gradColor1').value = '#C0C0C0';
+                document.getElementById('gradColor2').value = '#808080';
+                document.getElementById('frameColor').value = '#C0C0C0';
+                document.getElementById('frameType').value = 'gold';
+                document.getElementById('frameWidth').value = '15';
+            } else if (theme === 'ruby') {
+                document.getElementById('bgType').value = 'gradient';
+                document.getElementById('gradColor1').value = '#E0115F';
+                document.getElementById('gradColor2').value = '#8B0000';
+                document.getElementById('frameColor').value = '#E0115F';
+                document.getElementById('frameType').value = 'neon';
+                document.getElementById('frameWidth').value = '20';
+            } else if (theme === 'emerald') {
+                document.getElementById('bgType').value = 'gradient';
+                document.getElementById('gradColor1').value = '#50C878';
+                document.getElementById('gradColor2').value = '#228B22';
+                document.getElementById('frameColor').value = '#50C878';
+                document.getElementById('frameType').value = 'prestige';
+                document.getElementById('frameWidth').value = '15';
+                document.getElementById('glowIntensity').value = '20';
+            }
+            updateCanvas();
+        }
+
+        function downloadImage(format) {
+            const link = document.createElement('a');
+            link.href = canvas.toDataURL(`image/${format}`);
+            link.download = `instagram-post-${Date.now()}.${format}`;
+            link.click();
+            showToast(`دانلود ${format.toUpperCase()} شروع شد ↓`);
+        }
+
+        function shareImage() {
+            canvas.toBlob(blob => {
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'استودیو پست اینستاگرام',
+                        text: 'من این تصویر را با استودیو پست اینستاگرام خدابنده‌لو ایجاد کردم!',
+                        files: [new File([blob], 'post.png', { type: 'image/png' })]
+                    });
+                } else {
+                    showToast('اشتراک‌گذاری در این مرورگر پشتیبانی نمی‌شود');
+                }
+            });
+        }
+
+        function clearImage() {
+            image = null;
+            document.getElementById('imageInput').value = '';
+            updateCanvas();
+            showToast('تصویر حذف شد ✓');
+        }
+
+        function resetAll() {
+            if (confirm('آیا مطمئن هستید که می‌خواهید همه تنظیمات را بازنشانی کنید؟')) {
+                location.reload();
+            }
+        }
+
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        // Auto-update on input change
+        document.querySelectorAll('input, select').forEach(el => {
+            if (el.id !== 'imageInput' && el.id !== 'bgImage') {
+                el.addEventListener('change', updateCanvas);
+                el.addEventListener('input', updateCanvas);
+            }
+        });
+    </script>
+</body>
+</html>
